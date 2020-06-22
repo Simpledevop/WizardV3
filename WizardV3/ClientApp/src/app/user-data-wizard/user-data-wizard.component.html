@@ -1,0 +1,52 @@
+<form novalidate>
+  <pe-steps [(activeIndex)]="activeIndex" (change)="onChange($event)">
+    <pe-step label="Confirm eligibility">
+      <label for="firstname">First Name:</label>
+      <input id="firstname" name="firstname" type="text"
+             pInputText [(ngModel)]="firstName" />
+
+    </pe-step>
+
+    <pe-step label="Set up new mandate">
+      <h1>Direct Debit Mandate</h1>
+      <p>Please enter the details of the bank account you would like the monthly Direct Debit to be taken from.</p>
+      <label for="accountHolderName">Account Holder Name *</label>
+      <input id="accountHolderName" name="accountHolderName" type="text"
+             pInputText [(ngModel)]="lastName" />
+      <label for="sortCode">Sort code *:</label>
+      <input id="sortCodeStart" name="sortCodeStart" type="text"
+             pInputText [(ngModel)]="sortCodeStart" />
+      <input id="sortCodeMid" name="sortCodeMid" type="text"
+             pInputText [(ngModel)]="sortCodeMid" />
+      <input id="sortCodeEnd" name="sortCodeEnd" type="text"
+             pInputText [(ngModel)]="sortCodeEnd" />
+      <label for="accountNumber">Account number *:</label>
+      <input id="accountNumber" name="accountNumber" type="text"
+             pInputText [(ngModel)]="accountNumber" />
+      <p>Your Direct Debit will be set up for the collection on the <b>nth day of the month</b></p>
+      <p>* Indicates a required field</p>
+    </pe-step>
+
+    <pe-step label="Confirm details">
+      <label for="lastname">Last Name:</label>
+      <input id="lastname" name="lastname" type="text"
+             pInputText [(ngModel)]="lastName" />
+    </pe-step>
+
+    <pe-step label="Confirm instructions">
+      <label for="lastname">Last Name:</label>
+      <input id="lastname" name="lastname" type="text"
+             pInputText [(ngModel)]="lastName" />
+    </pe-step>
+
+    <pe-step label="Completed">
+      <label for="address">Address:</label>
+      <input id="address" name="address" type="text"
+             pInputText [(ngModel)]="address" />
+
+      <button pButton label="Ok" (click)="ok()"></button>
+    </pe-step>
+  </pe-steps>
+
+  <p-messages [(value)]="msgs"></p-messages>
+</form>
