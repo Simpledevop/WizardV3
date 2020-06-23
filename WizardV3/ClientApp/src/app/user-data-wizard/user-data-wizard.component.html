@@ -1,4 +1,4 @@
-<form novalidate>
+<!--<form novalidate>-->
   <pe-steps [(activeIndex)]="activeIndex" (change)="onChange($event)">
     <pe-step label="Confirm eligibility">
       <label for="firstname">First Name:</label>
@@ -10,19 +10,39 @@
     <pe-step label="Set up new mandate">
       <h1>Direct Debit Mandate</h1>
       <p>Please enter the details of the bank account you would like the monthly Direct Debit to be taken from.</p>
-      <label for="accountHolderName">Account Holder Name *</label>
-      <input id="accountHolderName" name="accountHolderName" type="text"
-             pInputText [(ngModel)]="lastName" />
-      <label for="sortCode">Sort code *:</label>
-      <input id="sortCodeStart" name="sortCodeStart" type="text"
-             pInputText [(ngModel)]="sortCodeStart" />
-      <input id="sortCodeMid" name="sortCodeMid" type="text"
-             pInputText [(ngModel)]="sortCodeMid" />
-      <input id="sortCodeEnd" name="sortCodeEnd" type="text"
-             pInputText [(ngModel)]="sortCodeEnd" />
-      <label for="accountNumber">Account number *:</label>
-      <input id="accountNumber" name="accountNumber" type="text"
-             pInputText [(ngModel)]="accountNumber" />
+
+      <form [formGroup]="form_SetupDDMandate_Step" (ngSubmit)="form_SetupDDMandate_Step_Submit()">
+        <div class="form-group">
+          <label for="accountHolderName">Account Holder Name *</label>
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" formControlName="accountHolderName" class="form-control" [ngClass]="{ 'is-invalid': form_SetupDDMandate_Step.submitted && form_SetupDDMandate_Step.get('accountHolderName').errors }" />
+            <div *ngIf="submitted && f.accountHolderName.errors" class="form-control is-invalid">
+              <div class="invalid-feedback" *ngIf="form_SetupDDMandate_Step.get('accountHolderName').errors.required">accountHolderName is required</div>
+            </div>
+          </div>
+          <!--<input [ngClass]="{'is-invalid': form_SetupDDMandate_Step.get('accountHolderName').errors.maxlength && form_SetupDDMandate_Step.get('accountHolderName').touched}"
+                 class="form-control is-invalid" id="accountHolderName" formControlName="accountHolderName" type="text"
+                 pInputText [(ngModel)]="lastName" />
+          <div class="invalid-feedback">Please choose a username</div>-->
+
+        </div>
+        <label for="sortCode">Sort code *:</label>
+        <input id="sortCodeDigits0to2" formControlName="sortCodeDigits0to2" type="text"
+               pInputText [(ngModel)]="sortCodeDigits0to2" class="form-control is-invalid" />
+        <div class="invalid-feedback">Please choose a username</div>
+        <input id="sortCodeDigits2to4" formControlName="sortCodeDigits2to4" type="text"
+               pInputText [(ngModel)]="sortCodeDigits2to4" />
+        <input id="sortCodeDigits4to6" formControlName="sortCodeDigits4to6" type="text"
+               pInputText [(ngModel)]="sortCodeDigits4to6" />
+        <label for="accountNumber">Account number *:</label>
+        <input id="accountNumber" formControlName="accountNumber" type="text"
+               pInputText [(ngModel)]="accountNumber" />
+        <button class="btn btn-success" type="submit">Register</button>
+
+      </form>
+
+      
       <p>Your Direct Debit will be set up for the collection on the <b>nth day of the month</b></p>
       <p>* Indicates a required field</p>
     </pe-step>
@@ -49,4 +69,4 @@
   </pe-steps>
 
   <p-messages [(value)]="msgs"></p-messages>
-</form>
+<!--</form>-->
